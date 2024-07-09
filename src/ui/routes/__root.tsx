@@ -1,23 +1,20 @@
-import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
+import { createRootRouteWithContext, Outlet } from '@tanstack/react-router'
+import { QueryClient } from '@tanstack/react-query'
+import { AuthContext } from '@/ui/hooks/useAuth.ts'
 
-export const Route = createRootRoute({
-  component: () => (
-    <>
-      <div className='p-2 flex gap-2'>
-        <Link to='/' className='[&.active]:font-bold'>
-          Home
-        </Link>{' '}
-        <Link to='/about' className='[&.active]:font-bold'>
-          About
-        </Link>
-        <Link to='/login' className='[&.active]:font-bold'>
-          Login
-        </Link>
-      </div>
-      <hr />
+const RootComponent = () => {
+  return (
+    <div className='flex min-h-screen'>
       <Outlet />
-      <TanStackRouterDevtools />
-    </>
+    </div>
   )
+}
+
+export const Route = createRootRouteWithContext<IRootRouterContext>()({
+  component: RootComponent
 })
+
+export interface IRootRouterContext {
+  queryClient: QueryClient
+  authentication: AuthContext
+}
