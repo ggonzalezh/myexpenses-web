@@ -1,6 +1,7 @@
 import { createRootRouteWithContext, Outlet } from '@tanstack/react-router'
 import { QueryClient } from '@tanstack/react-query'
 import { AuthContext } from '@/ui/hooks/useAuth.ts'
+import { SessionContext } from '@/ui/hooks/useSession.ts'
 
 const RootComponent = () => {
   return (
@@ -17,4 +18,5 @@ export const Route = createRootRouteWithContext<IRootRouterContext>()({
 export interface IRootRouterContext {
   queryClient: QueryClient
   authentication: AuthContext
+  session: SessionContext
 }
